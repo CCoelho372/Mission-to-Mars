@@ -101,31 +101,3 @@ if __name__ == "__main__":
 
     # If running as script, print scraped data
     print(scrape_all())
-
-from splinter import Browser
-
-executable_path = {'executable_path': ChromeDriverManager().install()}
-browser = Browser('chrome', **executable_path, headless=True)
-
-
-html = browser.html
-main_page = soup(html, 'html.parser')
-
-# 2. Create a list to hold the images and titles.
-hemisphere_image_urls = []
-
-# 3. Write code to retrieve the image urls and titles for each hemisphere.
-for i in range(4):
-    hemispheres={}
-    browser.find_by_tag('thumb')[i].click()
-    element = browser.find_by_text('Sample').first
-    img_url = element['href']
-    title = browser.find_by_tag('h2.title').text
-    hemispheres['img_url'] = img_url
-    hemispheres['title'] = title
-    hemisphere_image_urls.append(hemispheres)
-    browser.back()
-
-    hemisphere_image_urls
-
-    browser.quit()
